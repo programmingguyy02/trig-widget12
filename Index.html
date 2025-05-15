@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trigonometric Formulas Widget</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #e6f3ff;
+      margin: 0;
+    }
+    .widget {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #0059b3;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    .formula {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0f8ff;
+      border-left: 5px solid #0073e6;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="widget">
+    <h2>Trigonometric Formulas</h2>
+    <select id="formulaSelector">
+      <option value="">-- Select Formula --</option>
+
+      <optgroup label="Basic Trig Functions">
+        <option value="sin">Sine</option>
+        <option value="cos">Cosine</option>
+        <option value="tan">Tangent</option>
+        <option value="csc">Cosecant</option>
+        <option value="sec">Secant</option>
+        <option value="cot">Cotangent</option>
+      </optgroup>
+
+      <optgroup label="Pythagorean Identities">
+        <option value="pythagorean">Basic Identity</option>
+        <option value="pythagoreanTan">With Tangent</option>
+        <option value="pythagoreanCot">With Cotangent</option>
+      </optgroup>
+
+      <optgroup label="Angle Identities">
+        <option value="sumSin">Sum - Sine</option>
+        <option value="sumCos">Sum - Cosine</option>
+        <option value="sumTan">Sum - Tangent</option>
+        <option value="diffSin">Difference - Sine</option>
+        <option value="diffCos">Difference - Cosine</option>
+        <option value="diffTan">Difference - Tangent</option>
+      </optgroup>
+
+      <optgroup label="Double Angle">
+        <option value="doubleSin">Sine</option>
+        <option value="doubleCos">Cosine</option>
+        <option value="doubleTan">Tangent</option>
+      </optgroup>
+
+      <optgroup label="Half-Angle">
+        <option value="halfSin">Sine</option>
+        <option value="halfCos">Cosine</option>
+        <option value="halfTan">Tangent</option>
+      </optgroup>
+
+      <optgroup label="Product-to-Sum">
+        <option value="productToSumSinCos">sin A cos B</option>
+        <option value="productToSumCosCos">cos A cos B</option>
+        <option value="productToSumSinSin">sin A sin B</option>
+      </optgroup>
+
+      <optgroup label="Sum-to-Product">
+        <option value="sumToProductSin">sin A + sin B</option>
+        <option value="sumToProductCos">cos A + cos B</option>
+      </optgroup>
+
+      <optgroup label="Power Reduction">
+        <option value="powerRedSin">sin²θ</option>
+        <option value="powerRedCos">cos²θ</option>
+      </optgroup>
+
+      <optgroup label="Reciprocal & Co-Function">
+        <option value="reciprocal">Reciprocal Identities</option>
+        <option value="cofunction">Co-Function Identities</option>
+      </optgroup>
+    </select>
+
+    <div id="formulaDisplay" class="formula"></div>
+  </div>
+  <footer>Coded by Dila</footer>
+
+  <script>
+    const formulas = {
+      sin: "\\sin \\theta = \\frac{\\text{opposite}}{\\text{hypotenuse}}",
+      cos: "\\cos \\theta = \\frac{\\text{adjacent}}{\\text{hypotenuse}}",
+      tan: "\\tan \\theta = \\frac{\\text{opposite}}{\\text{adjacent}}",
+      csc: "\\csc \\theta = \\frac{\\text{hypotenuse}}{\\text{opposite}}",
+      sec: "\\sec \\theta = \\frac{\\text{hypotenuse}}{\\text{adjacent}}",
+      cot: "\\cot \\theta = \\frac{\\text{adjacent}}{\\text{opposite}}",
+
+      pythagorean: "\\sin^2\\theta + \\cos^2\\theta = 1",
+      pythagoreanTan: "1 + \\tan^2\\theta = \\sec^2\\theta",
+      pythagoreanCot: "1 + \\cot^2\\theta = \\csc^2\\theta",
+
+      sumSin: "\\sin(A+B) = \\sin A \\cos B + \\cos A \\sin B",
+      sumCos: "\\cos(A+B) = \\cos A \\cos B - \\sin A \\sin B",
+      sumTan: "\\tan(A+B) = \\frac{\\tan A + \\tan B}{1 - \\tan A \\tan B}",
+
+      diffSin: "\\sin(A-B) = \\sin A \\cos B - \\cos A \\sin B",
+      diffCos: "\\cos(A-B) = \\cos A \\cos B + \\sin A \\sin B",
+      diffTan: "\\tan(A-B) = \\frac{\\tan A - \\tan B}{1 + \\tan A \\tan B}",
+
+      doubleSin: "\\sin(2\\theta) = 2\\sin\\theta \\cos\\theta",
+      doubleCos: "\\cos(2\\theta) = \\cos^2\\theta - \\sin^2\\theta",
+      doubleTan: "\\tan(2\\theta) = \\frac{2\\tan\\theta}{1 - \\tan^2\\theta}",
+
+      halfSin: "\\sin\\left(\\frac{\\theta}{2}\\right) = \\pm \\sqrt{\\frac{1 - \\cos\\theta}{2}}",
+      halfCos: "\\cos\\left(\\frac{\\theta}{2}\\right) = \\pm \\sqrt{\\frac{1 + \\cos\\theta}{2}}",
+      halfTan: "\\tan\\left(\\frac{\\theta}{2}\\right) = \\frac{\\sin\\theta}{1 + \\cos\\theta}",
+
+      productToSumSinCos: "\\sin A \\cos B = \\frac{\\sin(A+B) + \\sin(A-B)}{2}",
+      productToSumCosCos: "\\cos A \\cos B = \\frac{\\cos(A+B) + \\cos(A-B)}{2}",
+      productToSumSinSin: "\\sin A \\sin B = \\frac{\\cos(A-B) - \\cos(A+B)}{2}",
+
+      sumToProductSin: "\\sin A + \\sin B = 2\\sin\\left(\\frac{A+B}{2}\\right)\\cos\\left(\\frac{A-B}{2}\\right)",
+      sumToProductCos: "\\cos A + \\cos B = 2\\cos\\left(\\frac{A+B}{2}\\right)\\cos\\left(\\frac{A-B}{2}\\right)",
+
+      powerRedSin: "\\sin^2\\theta = \\frac{1 - \\cos(2\\theta)}{2}",
+      powerRedCos: "\\cos^2\\theta = \\frac{1 + \\cos(2\\theta)}{2}",
+
+      reciprocal: "\\csc\\theta = \\frac{1}{\\sin\\theta},\\quad \\sec\\theta = \\frac{1}{\\cos\\theta},\\quad \\cot\\theta = \\frac{1}{\\tan\\theta}",
+      cofunction: "\\sin(90^\\circ - \\theta) = \\cos\\theta,\\quad \\cos(90^\\circ - \\theta) = \\sin\\theta"
+    };
+
+    const selector = document.getElementById("formulaSelector");
+    const display = document.getElementById("formulaDisplay");
+
+    function renderFormula() {
+      const key = selector.value;
+      if (key && formulas[key]) {
+        display.innerHTML = `$$${formulas[key]}$$`;
+        if (window.MathJax) {
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub, display]);
+        }
+      } else {
+        display.innerHTML = "";
+      }
+    }
+
+    selector.addEventListener("change", renderFormula);
+
+    // Load MathJax
+    (function () {
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/mathjax @2.7.9/MathJax.js?config=TeX-MML-AM_CHTML";
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+  </script>
+</body>
+</html>
